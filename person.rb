@@ -1,4 +1,9 @@
-class PersonValidError < StandardError
+# create my own exception class
+
+class PersonInvalidNameError < StandardError
+end
+
+class PersonInvalidAgeError < StandardError
 end
 
 class Person
@@ -8,19 +13,46 @@ class Person
     @name = name
     @age = age
   end
+
+  def valid_name
+    raise PersonInvalidNameError.new("Invalid name") unless (name.length > 1 && name.length < 10)
+  end
+
+  def valid_age
+    raise PersonInvalidAgeError.new("Invalid age") unless (age > 0 && age < 115)
+  end
+
 end
 
+begin
+  tom = Person.new('tom', 57)
+  tom.valid_name
+  tom.valid_age
+  puts "Name and age are valid"
+rescue PersonInvalidAgeError => e
+  puts e.message
+rescue PersonInvalidNameError => e
+  puts e.message
+end
 
-tom = Person.new('tom', 57)
-puts "tom's name is " + (tom.valid_name? ? "valid" : "not valid")
-puts "tom's age is " + (tom.valid_age? ? "valid" : "not valid")
+begin
+  ed = Person.new('ed', 116)
+  ed.valid_name
+  ed.valid_age
+  puts "Name and age are valid"
+rescue PersonInvalidAgeError => e
+  puts e.message
+rescue PersonInvalidNameError => e
+  puts e.message
+end
 
-ed = Person.new('ed', 111)
-puts "ed's name is " + (ed.valid_name? ? "valid" : "not valid")
-puts "ed's age is " + (ed.valid_age? ? "valid" : "not valid")
-
-jane = Person.new('j', 33)
-puts "jane's name is " + (jane.valid_name? ? "valid" : "not valid")
-puts "jane's age is " + (jane.valid_age? ? "valid" : "not valid")
-
-
+begin
+  michaelangelo = Person.new('michaelangelo', 30)
+  michaelangelo.valid_name
+  michaelangelo.valid_age
+  puts "Name and age are valid"
+rescue PersonInvalidAgeError => e
+  puts e.message
+rescue PersonInvalidNameError => e
+  puts e.message
+end
