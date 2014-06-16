@@ -26,7 +26,6 @@ rescue CarValidationErrors => error
   retry
 end
 
-puts
-puts "VIN: #{new_car.vin}"
+puts "Your car is valid. It's VIN is #{new_car.vin}"
 
 # binding.pry
