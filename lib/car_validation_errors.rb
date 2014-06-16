@@ -1,0 +1,2 @@
+class CarValidationErrors < StandardError
+end
